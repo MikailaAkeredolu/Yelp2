@@ -19,6 +19,13 @@ public class BusinessCtrl {
         return new ResponseEntity<>(businesses, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/addBusiness", method = RequestMethod.POST)
+    public ResponseEntity<?> add(@RequestBody Business business){
+        businessRepo.save(business);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
+    }
+
+
     @RequestMapping(value = "/createBusiness", method = RequestMethod.POST)
     public ResponseEntity<?> createBusiness(@RequestBody Business business){
         businessRepo.save(business);

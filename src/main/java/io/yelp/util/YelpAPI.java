@@ -18,11 +18,12 @@ import com.beust.jcommander.Parameter;
 /**
  * Created by mikailaakeredolu on 6/20/16.
  */
-public class YelpAPI {
+
+public  class YelpAPI {
 
     private static final String API_HOST = "api.yelp.com";
     private static final String DEFAULT_TERM = "pizza";
-    private static final String DEFAULT_LOCATION = "Philadelphia, PA";
+    private static final String DEFAULT_LOCATION = "Brooklyn,NY";
     private static final int SEARCH_LIMIT = 20;
     private static final String SEARCH_PATH = "/v2/search";
     private static final String BUSINESS_PATH = "/v2/business";
@@ -42,6 +43,8 @@ public class YelpAPI {
                         .apiSecret(consumerSecret).build();
         this.accessToken = new Token(token, tokenSecret);
     }
+
+
 
     public String searchForBusinessesByLocation(String term, String location) {
         OAuthRequest request = createOAuthRequest(SEARCH_PATH);
@@ -68,7 +71,7 @@ public class YelpAPI {
         return response.getBody();
     }
 
-    private static void queryAPI(YelpAPI yelpApi, YelpAPICLI yelpApiCli) {
+    public static void queryAPI(YelpAPI yelpApi, YelpAPICLI yelpApiCli) {
         String searchResponseJSON =
                 yelpApi.searchForBusinessesByLocation(yelpApiCli.term, yelpApiCli.location);
 
@@ -98,19 +101,25 @@ public class YelpAPI {
 
         // Select the first business and display business details
         String businessResponseJSON = yelpApi.searchByBusinessId(firstBusinessID.toString());
-        try {
+        Add smallAdd = new Add();
+            try {
+
             Business preetyb = mapper.readValue(businessResponseJSON, Business.class);
+            smallAdd.addValue(preetyb.getName(),preetyb.getMobile_url(),preetyb.getPhone(),preetyb.getRating(),preetyb.getReview_count(),preetyb.getIsClose());
+           /*
             System.out.println(preetyb.getName());
             System.out.println(preetyb.getRating());
             System.out.println(preetyb.getReview_count());
             //System.out.println(preetyb.getMobile_url());
             System.out.println(preetyb.getPhone());
+            */
         }catch (Exception e) {
             e.printStackTrace();
         }
 
         }
 }
+
 
 
 
@@ -121,6 +130,7 @@ public class YelpAPI {
         @Parameter(names = {"-l", "--location"}, description = "Location to be Queried")
         public String location = DEFAULT_LOCATION;
     }
+
 
     public static void main(String[] args) {
         YelpAPICLI yelpApiCli = new YelpAPICLI();
