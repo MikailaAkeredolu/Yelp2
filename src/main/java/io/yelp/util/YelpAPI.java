@@ -23,16 +23,10 @@ public  class YelpAPI {
 
     private static final String API_HOST = "api.yelp.com";
     private static final String DEFAULT_TERM = "pizza";
-    private static final String DEFAULT_LOCATION = "Brooklyn,NY";
+    private static final String DEFAULT_LOCATION = "Bear,DE";
     private static final int SEARCH_LIMIT = 20;
     private static final String SEARCH_PATH = "/v2/search";
     private static final String BUSINESS_PATH = "/v2/business";
-
-    private static final String CONSUMER_KEY = "DTIAMGukH_VE_Zqjveb23Q";
-    private static final String CONSUMER_SECRET = "lgE5dlOTYdosCjDfb42zkzpZ_Lg";
-    private static final String TOKEN = "xQvQWx1jw6h0t7joQcQTsqRHgUuT_25t";
-    private static final String TOKEN_SECRET = "_3VVZ2aX7-hZazaROpLS_NazZEE";
-
 
     OAuthService service;
     Token accessToken;
@@ -106,13 +100,13 @@ public  class YelpAPI {
 
             Business preetyb = mapper.readValue(businessResponseJSON, Business.class);
             smallAdd.addValue(preetyb.getName(),preetyb.getMobile_url(),preetyb.getPhone(),preetyb.getRating(),preetyb.getReview_count(),preetyb.getIsClose());
-           /*
+
             System.out.println(preetyb.getName());
             System.out.println(preetyb.getRating());
             System.out.println(preetyb.getReview_count());
             //System.out.println(preetyb.getMobile_url());
             System.out.println(preetyb.getPhone());
-            */
+
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,7 +125,7 @@ public  class YelpAPI {
         public String location = DEFAULT_LOCATION;
     }
 
-
+/*
     public static void main(String[] args) {
         YelpAPICLI yelpApiCli = new YelpAPICLI();
         new JCommander(yelpApiCli, args);
@@ -142,6 +136,6 @@ public  class YelpAPI {
      //   yelpApi.run();
 
     }
-
+*/
 
 }

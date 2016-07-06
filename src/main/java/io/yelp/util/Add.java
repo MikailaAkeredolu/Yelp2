@@ -12,7 +12,7 @@ public class Add {
         int id = 0;
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/yelpDB3?autoReconnect=true&useSSL=false","root","");
-        //jdbc:mysql://localhost:3306/yelpDB3?autoReconnect=true&useSSL=false
+
         Statement statement = con.createStatement();
         String query = "select * from business order by business_id desc limit 1";
         ResultSet resultSet = statement.executeQuery(query);
